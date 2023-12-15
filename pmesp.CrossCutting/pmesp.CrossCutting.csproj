@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\pmesp.Application\pmesp.Application.csproj" />
+    <ProjectReference Include="..\pmesp.Domain\pmesp.Domain.csproj" />
+    <ProjectReference Include="..\pmesp.Infrastructure\pmesp.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
