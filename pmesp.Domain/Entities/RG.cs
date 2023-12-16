@@ -1,29 +1,31 @@
-﻿using pmesp.Domain.Entities.Common;
-using pmesp.Domain.Validations;
-using System.ComponentModel.DataAnnotations;
+﻿using pmesp.Domain.Validations;
 
 namespace pmesp.Domain.Entities;
 
-public class RG : BaseEntity
+public class RG
 {
+    public string Id { get; private set; }
     public string Number { get; private set; }
-    public string? Sender {  get; private set; }
-    public string? Uf {  get; private set; }
-    public DateTime? SenderDate { get; private set; }
-    public Guid PersonId { get; set; }
-    public Bandit Person { get; set; }
+    public string Sender {  get; private set; }
+    public string Uf {  get; private set; }
+    public DateTime SenderDate { get; private set; }
+    public string BanditId { get; set; }
+    public Bandit Bandit { get; set; }
 
-    public RG(Guid id, string number, string? sender, string? Uf, DateTime? senderDate, Guid banditId) : base(id)
+    public RG(string number, string sender, string uf, DateTime senderDate)
     {
-        ValidateDomain(number, sender, Uf, senderDate, banditId);
+        ValidateDomain(number, sender, uf, senderDate);
+    }
+
+    public void Update(string number, string sender, string uf, DateTime senderDate)
+    {
+        ValidateDomain(number, sender, uf, senderDate);
     }
 
     
-    public void ValidateDomain(string number, string? sender, string? uf, DateTime? senderDate, Guid banditId)
+    public void ValidateDomain(string number, string sender, string uf, DateTime senderDate)
     {
-        DomainExceptionValidation.When(banditId == Guid.Empty, "É necessário passar o Id do portador desse RG");
         DomainExceptionValidation.When(number.Length > 15, "O rg precisa ter no máximo 15 caracteres");
-        PersonId = banditId;
         Number = number;
         Sender = sender;
         Uf = uf; 
