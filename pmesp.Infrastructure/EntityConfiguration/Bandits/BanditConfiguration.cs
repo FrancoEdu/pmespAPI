@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using pmesp.Domain.Entities;
+using pmesp.Domain.Entities.Bandits;
 
-namespace pmesp.Infrastructure.EntityConfiguration;
+namespace pmesp.Infrastructure.EntityConfiguration.Bandits;
 
 internal class BanditConfiguration : IEntityTypeConfiguration<Bandit>
 {

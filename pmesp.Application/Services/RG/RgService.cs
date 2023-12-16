@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using pmesp.Application.DTOs;
-using pmesp.Application.Interfaces;
-using pmesp.Domain.Entities;
+using pmesp.Application.DTOs.RGs;
+using pmesp.Application.Interfaces.RGs;
+using pmesp.Domain.Entities.RGs;
 using pmesp.Domain.Interfaces.Irg;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace pmesp.Application.Services;
+namespace pmesp.Application.Services.RGs;
 
 public class RgService : IRgsService
 {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using pmesp.Domain.Entities;
+using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Interfaces.Bandits;
 using pmesp.Infrastructure.Context;
 
-namespace pmesp.Infrastructure.Repositories;
+namespace pmesp.Infrastructure.Repositories.Bandits;
 
 public class BanditRepository : IBanditRepository
 {

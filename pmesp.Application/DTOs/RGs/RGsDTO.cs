@@ -1,7 +1,7 @@
 ﻿using pmesp.Domain.Entities;
 using System;
 
-namespace pmesp.Application.DTOs;
+namespace pmesp.Application.DTOs.RGs;
 
 public class RGsDTO
 {

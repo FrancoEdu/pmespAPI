@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using pmesp.Domain.Entities;
+using pmesp.Domain.Entities.Bandits;
+using pmesp.Domain.Entities.RGs;
 
 namespace pmesp.Infrastructure.Context;
 

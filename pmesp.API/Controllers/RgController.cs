@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using pmesp.Application.DTOs;
-using pmesp.Application.Interfaces;
+using pmesp.Application.DTOs.RGs;
+using pmesp.Application.Interfaces.RGs;
 using pmesp.Application.Services;
 using pmesp.Domain.Entities;
 

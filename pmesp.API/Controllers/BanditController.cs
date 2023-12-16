@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using pmesp.Application.DTOs;
-using pmesp.Application.Interfaces;
-using pmesp.Domain.Entities;
+using pmesp.Application.DTOs.Bandits;
+using pmesp.Application.Interfaces.Bandits;
+using pmesp.Domain.Entities.Bandits;
 
 namespace pmesp.API.Controllers
 {
@@ -55,6 +55,48 @@ namespace pmesp.API.Controllers
                 return NotFound();
             }
             return Ok(banditDTO);
+        }
+
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Bandit>> GetByName(string name)
+        {
+            var banditDTO = await _banditService.GetBanditByName(name);
+
+            if (banditDTO == null)
+            {
+                return NotFound();
+            }
+            return Ok(banditDTO);
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Bandit>> delete(string id)
+        {
+            var banditDTO = await _banditService.GetById(id);
+
+            if (banditDTO == null)
+            {
+                return NotFound();
+            }
+            await _banditService.Delete(id);
+            return Ok(banditDTO);
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Bandit>> Put(string id, [FromBody] BanditDTO dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id.Length < 0)
+            {
+                return BadRequest();
+            }
+            await _banditService.Update(dto);
+            return Ok(dto);
         }
     }
 }

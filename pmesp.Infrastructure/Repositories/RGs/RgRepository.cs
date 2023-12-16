@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using pmesp.Domain.Entities;
+using pmesp.Domain.Entities.RGs;
 using pmesp.Domain.Interfaces.Irg;
 using pmesp.Infrastructure.Context;
 
-namespace pmesp.Infrastructure.Repositories;
+
+namespace pmesp.Infrastructure.Repositories.RGs;
 
 public class RgRepository : IRgRepository
 {

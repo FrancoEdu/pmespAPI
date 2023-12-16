@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using pmesp.Application.DTOs;
-using pmesp.Application.Interfaces;
-using pmesp.Domain.Entities;
+using pmesp.Application.DTOs.Bandits;
+using pmesp.Application.Interfaces.Bandits;
+using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Interfaces.Bandits;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace pmesp.Application.Services;
+namespace pmesp.Application.Services.Bandits;
 
 public class BanditService : IBanditService
 {
@@ -46,6 +46,13 @@ public class BanditService : IBanditService
     }
 
     public async Task<BanditDTO> GetById(string id)
+    {
+        var bandit = await _banditRepository.GetByIdAsync(id);
+        var banditDTO = _mapper.Map<BanditDTO>(bandit);
+        return banditDTO;
+    }
+
+    public async Task<BanditDTO> GetBanditByName(string id)
     {
         var bandit = await _banditRepository.GetByIdAsync(id);
         var banditDTO = _mapper.Map<BanditDTO>(bandit);

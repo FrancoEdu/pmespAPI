@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pmesp.Application.Interfaces;
+namespace pmesp.Application.Interfaces.Base;
 
 public interface IBaseService<T>
 {

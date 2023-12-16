@@ -1,4 +1,4 @@
-﻿using pmesp.Domain.Entities;
+﻿using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Interfaces.Base;
 
 namespace pmesp.Domain.Interfaces.Bandits;

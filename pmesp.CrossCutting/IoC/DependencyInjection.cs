@@ -1,14 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using pmesp.Application.Interfaces;
+using pmesp.Application.Interfaces.Bandits;
+using pmesp.Application.Interfaces.RGs;
 using pmesp.Application.Mappings;
-using pmesp.Application.Services;
+using pmesp.Application.Services.Bandits;
+using pmesp.Application.Services.RGs;
 using pmesp.Domain.Interfaces.Bandits;
 using pmesp.Domain.Interfaces.Irg;
 using pmesp.Infrastructure.Context;
-using pmesp.Infrastructure.Repositories;
-using System;
+using pmesp.Infrastructure.Repositories.Bandits;
+using pmesp.Infrastructure.Repositories.RGs;
 
 namespace pmesp.CrossCutting.IoC;
 

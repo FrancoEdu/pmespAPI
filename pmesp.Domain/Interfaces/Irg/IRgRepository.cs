@@ -1,4 +1,4 @@
-﻿using pmesp.Domain.Entities;
+﻿using pmesp.Domain.Entities.RGs;
 using pmesp.Domain.Interfaces.Base;
 
 namespace pmesp.Domain.Interfaces.Irg;
