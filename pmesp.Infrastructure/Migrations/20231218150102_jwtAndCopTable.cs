@@ -24,8 +24,8 @@ namespace pmesp.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Graduation = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PasswordHash = table.Column<byte[]>(type: "longblob", nullable: false),
-                    PasswordSalt = table.Column<byte[]>(type: "longblob", nullable: false)
+                    PasswordHash = table.Column<byte[]>(type: "longblob", nullable: true),
+                    PasswordSalt = table.Column<byte[]>(type: "longblob", nullable: true)
                 },
                 constraints: table =>
                 {

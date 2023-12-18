@@ -9,8 +9,8 @@ public class Cop
     public string Email { get; private set; }
     public string? Description { get; private set; }
     public string Graduation { get; private set; }
-    public byte[] PasswordHash { get; private set; }
-    public byte[] PasswordSalt { get; private set; }
+    public byte[]? PasswordHash { get; private set; }
+    public byte[]? PasswordSalt { get; private set; }
 
     public Cop(string id,string email, string name, string? description, string graduation)
     {
