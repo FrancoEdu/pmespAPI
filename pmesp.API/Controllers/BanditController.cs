@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using pmesp.Application.DTOs.Bandits;
 using pmesp.Application.Interfaces.Bandits;
@@ -8,6 +8,7 @@ namespace pmesp.API.Controllers
 {
     [Route("api/bandit")]
     [ApiController]
+    //[Authorize]
     public class BanditController : ControllerBase
     {
         private readonly IBanditService _banditService;
@@ -49,18 +50,6 @@ namespace pmesp.API.Controllers
         public async Task<ActionResult<Bandit>> Get(string id)
         {
             var banditDTO = await _banditService.GetById(id);
-
-            if (banditDTO == null)
-            {
-                return NotFound();
-            }
-            return Ok(banditDTO);
-        }
-
-        [HttpGet("{name}")]
-        public async Task<ActionResult<Bandit>> GetByName(string name)
-        {
-            var banditDTO = await _banditService.GetBanditByName(name);
 
             if (banditDTO == null)
             {

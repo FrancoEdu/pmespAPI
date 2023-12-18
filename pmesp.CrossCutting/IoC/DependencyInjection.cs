@@ -33,13 +33,8 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(sqlConnection, ServerVersion.AutoDetect(sqlConnection)));
 
         // Configurando autenticação e JWT
-        services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }
-        ).AddJwtBearer(options =>
-        {
+        services.AddAuthentication(
+            JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
@@ -52,8 +47,8 @@ public static class DependencyInjection
                 IssuerSigningKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(configuration["Jwt:secretKey"])
                 )
-            };
-        });
+            }
+        );
        
         services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 

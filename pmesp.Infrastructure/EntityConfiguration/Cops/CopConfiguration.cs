@@ -12,6 +12,7 @@ public class CopConfiguration : IEntityTypeConfiguration<Cop>
         builder.Property(x => x.Name).IsRequired();
         builder.Property(x => x.Email).IsRequired();
         builder.Property(x => x.Graduation).IsRequired();
-        builder.Property(x=> x.Description).HasMaxLength(255);
+        builder.Property(x => x.Description).HasMaxLength(255);
+        builder.Property(x => x.IsAdmin).IsRequired();
     }
 }

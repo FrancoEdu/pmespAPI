@@ -11,6 +11,7 @@ public class Cop
     public string Graduation { get; private set; }
     public byte[]? PasswordHash { get; private set; }
     public byte[]? PasswordSalt { get; private set; }
+    public bool IsAdmin { get; private set; }
 
     public Cop(string id,string email, string name, string? description, string graduation)
     {
@@ -27,6 +28,11 @@ public class Cop
     {
         PasswordHash = passwordHash;
         PasswordSalt = passwordSalt;
+    }
+
+    public void SetAdmin(bool admin)
+    {
+        IsAdmin = admin;
     }
 
     public void ValidateDomain(string email, string name, string? description, string graduation)
@@ -47,5 +53,6 @@ public class Cop
         DomainExceptionValidation.When(graduation == null, "A graduação do policial é obrigatório");
         DomainExceptionValidation.When(graduation.Length > 5, "Por favor, abrevie a graduação, ex: CB PM Henrique");
         Graduation = graduation;
+        IsAdmin = false;
     }
 }

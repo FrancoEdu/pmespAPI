@@ -66,8 +66,8 @@ public class IdentityRepository : IAuthenticate
 
         JwtSecurityToken token = new JwtSecurityToken
         (
-            issuer: _configuration["Jwt:secretKey"],
-            audience: _configuration["Jwt:secretKey"],
+            issuer: _configuration["Jwt:issuer"],
+            audience: _configuration["Jwt:audience"],
             claims: claims,
             expires: expiration,
             signingCredentials: credentials
