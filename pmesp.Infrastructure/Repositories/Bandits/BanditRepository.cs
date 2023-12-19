@@ -28,12 +28,12 @@ public class BanditRepository : IBanditRepository
         return entity;
     }
 
-    public async Task<IEnumerable<Bandit>> GetAllAsync()
+    public async Task<ICollection<Bandit>> GetAllAsync()
     {
         return await _context.Bandits.AsNoTracking().ToListAsync();
     }
 
-    public async Task<IEnumerable<Bandit>> GetAllInfos()
+    public async Task<ICollection<Bandit>> GetAllInfos()
     {
         return await _context.Bandits.AsNoTracking().Include(rg => rg.rGs).ToListAsync();
     }
@@ -68,6 +68,11 @@ public class BanditRepository : IBanditRepository
             AsNoTracking().
             Include(rg => rg.rGs).
             FirstOrDefaultAsync(x => x.Name.Equals(name));
+    }
+
+    public Task<Bandit> GetByNameAsync(string name)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<Bandit> UpdateAsync(Bandit entity)
