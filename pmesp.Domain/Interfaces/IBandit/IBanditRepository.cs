@@ -8,5 +8,5 @@ public interface IBanditRepository : IRepository<Bandit>
     Task<Bandit> GetByNameAsync(string name);
     Task<Bandit> GetByEmailAsync(string name);
     Task<Bandit> GetByCpfAsync(string cpf);
-    Task<ICollection<Bandit>> GetAllInfos();
+    Task<ICollection<Bandit>> GetAllInfosAsync();
 }

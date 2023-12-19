@@ -33,7 +33,7 @@ public class BanditRepository : IBanditRepository
         return await _context.Bandits.AsNoTracking().ToListAsync();
     }
 
-    public async Task<ICollection<Bandit>> GetAllInfos()
+    public async Task<ICollection<Bandit>> GetAllInfosAsync()
     {
         return await _context.Bandits.AsNoTracking().Include(rg => rg.rGs).ToListAsync();
     }
@@ -47,9 +47,13 @@ public class BanditRepository : IBanditRepository
                 FirstOrDefaultAsync(x => x.CPF.Equals(cpf));
     }
 
-    public Task<Bandit> GetByEmailAsync(string name)
+    public async Task<Bandit> GetByEmailAsync(string email)
     {
-        throw new NotImplementedException();
+        return await _context.
+                 Bandits.
+                 AsNoTracking().
+                 Include(rg => rg.rGs).
+                 FirstOrDefaultAsync(x => x.Email.Equals(email));
     }
 
     public Task<Bandit> GetByIdAsync(string id)
@@ -61,18 +65,13 @@ public class BanditRepository : IBanditRepository
                 FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 
-    public async Task<Bandit> GetByName(string name)
+    public async Task<Bandit> GetByNameAsync(string name)
     {
         return await _context.
             Bandits.
             AsNoTracking().
             Include(rg => rg.rGs).
             FirstOrDefaultAsync(x => x.Name.Equals(name));
-    }
-
-    public Task<Bandit> GetByNameAsync(string name)
-    {
-        throw new NotImplementedException();
     }
 
     public async Task<Bandit> UpdateAsync(Bandit entity)
