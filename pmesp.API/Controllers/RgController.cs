@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using pmesp.Application.DTOs.RGs;
 using pmesp.Application.Interfaces.RGs;
-using pmesp.Domain.Entities.RGs;
 
 namespace pmesp.API.Controllers
 {
@@ -16,61 +15,32 @@ namespace pmesp.API.Controllers
             _rgsService = rgsService;
         }
 
-        /*
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] RGsDTO rgDto)
+        public async Task<ActionResult> PostAsync([FromBody] RGsDTO rgDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            await _rgsService.Add(rgDto);
-
-            return new CreatedAtRouteResult("GetRG",
-                new { id = rgDto.Id }, rgDto);
+            var result = await _rgsService.PostAsync(rgDto);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpGet("{id}", Name = "GetRG")]
-        public async Task<ActionResult<RG>> Get(string id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetByIdAsync(string id)
         {
-            var rg = await _rgsService.GetById(id);
+            var result = await _rgsService.GetByIdAsync(id);
+            return result.Success ? Ok(result) : NotFound(result);
+        }
 
-            if (rg == null)
-            {
-                return NotFound();
-            }
-            return Ok(rg);
+        [HttpGet]
+        public async Task<ActionResult> GetAllAsync()
+        {
+            var result = await _rgsService.GetAllAsync();
+            return result.Success ? Ok(result) : NotFound(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<RG>> Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
-            var rg = await _rgsService.GetById(id);
-            if(rg == null)
-            {
-                return NotFound("Nenhum RG encontrado com esse id");
-            }
-
-            await _rgsService.Delete(id);
-            return Ok(rg);
+            var result = await _rgsService.DeleteByIdAsync(id);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<RG>> Put(string id, [FromBody]RGsDTO rg)
-        {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (id.Length < 0)
-            {
-                return BadRequest("Necessário o envio do token para validarmos");
-            }
-
-            await _rgsService.Update(rg);
-            return Ok(rg);
-        }
-        */
     }
 }
