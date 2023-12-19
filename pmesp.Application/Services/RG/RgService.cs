@@ -4,6 +4,7 @@ using pmesp.Application.DTOs.RGs;
 using pmesp.Application.Interfaces.Base;
 using pmesp.Application.Interfaces.RGs;
 using pmesp.Domain.Entities.RGs;
+using pmesp.Domain.Interfaces.Bandits;
 using pmesp.Domain.Interfaces.Irg;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,12 +14,15 @@ namespace pmesp.Application.Services.RGs;
 public class RgService : IRgsService
 {
     private IRgRepository _rgRepository;
+    private IBanditRepository _banditRepository;
+
     private readonly IMapper _mapper;
 
-    public RgService(IRgRepository rgRepository, IMapper mapper)
+    public RgService(IRgRepository rgRepository, IBanditRepository banditRepository,IMapper mapper)
     {
         _mapper = mapper;
         _rgRepository = rgRepository;
+        _banditRepository = banditRepository;
     }
 
     public async Task<ResultService<ICollection<RGsDTO>>> GetAllAsync()
@@ -49,8 +53,27 @@ public class RgService : IRgsService
         return ResultService.Ok<RGsDTO>(_mapper.Map<RGsDTO>(rg), "RG excluído");
     }
 
-    public Task<ResultService<RGsDTO>> PostAsync(RGsDTO entity)
+    public async Task<ResultService<RGsDTO>> PostAsync(RGsDTO entity)
     {
-        throw new System.NotImplementedException();
+        if(entity == null)
+        {
+            return ResultService.Fail<RGsDTO>("O corpo da requisição está vazio");
+        }
+
+        var result = new RGsDTOValidator().Validate(entity);
+        if (!result.IsValid)
+        {
+            return ResultService.RequestError<RGsDTO>("Corpo da requisição com informações inválidas", result);
+        }
+
+        var existsBandiIfCurrentId = await _banditRepository.GetByIdAsync(entity.BanditId);
+        if(existsBandiIfCurrentId == null)
+        {
+            return ResultService.Fail<RGsDTO>("Não existe bandido com o Id atribuído");
+        }
+
+        var rg = _mapper.Map<RG>(entity);
+        var data = await _rgRepository.CreateAsync(rg);
+        return ResultService.Ok<RGsDTO>(_mapper.Map<RGsDTO>(rg), $"RG adicionado ao bandido {existsBandiIfCurrentId.Surname} com sucesso");
     }
 }
