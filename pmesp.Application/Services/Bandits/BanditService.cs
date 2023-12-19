@@ -3,7 +3,6 @@ using pmesp.Application.DTOs.Bandits;
 using pmesp.Application.Interfaces.Bandits;
 using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Interfaces.Bandits;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

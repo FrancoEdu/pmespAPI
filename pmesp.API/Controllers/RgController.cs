@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using pmesp.Application.DTOs.RGs;
 using pmesp.Application.Interfaces.RGs;
-using pmesp.Domain.Entities.RGs;
 
 namespace pmesp.API.Controllers
 {

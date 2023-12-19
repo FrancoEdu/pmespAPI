@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using pmesp.Application.DTOs.Bandits;
 using pmesp.Application.DTOs.RGs;
-using pmesp.Application.Interfaces.Base;
 using pmesp.Application.Interfaces.RGs;
 using pmesp.Domain.Entities.RGs;
 using pmesp.Domain.Interfaces.Bandits;
