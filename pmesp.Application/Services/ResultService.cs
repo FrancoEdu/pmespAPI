@@ -41,7 +41,7 @@ public class ResultService
     public static ResultService<T> Fail<T>(string message) => new ResultService<T> { Success = false, Message = message };
 
     public static ResultService Ok(string message) => new ResultService { Success = true, Message = message };
-    public static ResultService<T> Ok<T>(T data) => new ResultService<T> { Success = true, Data = data };
+    public static ResultService<T> Ok<T>(T data, string message) => new ResultService<T> { Success = true, Data = data, Message = message};
 }
 
 public class ResultService<T> : ResultService

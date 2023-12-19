@@ -22,5 +22,26 @@ namespace pmesp.API.Controllers
             var result = await _banditService.GetAllAsync();
             return result.Success ? Ok(result) : BadRequest(result);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetByIdAsync(string id)
+        {
+            var result = await _banditService.GetByIdAsync(id);
+            return result.Success ? Ok(result) : NotFound(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteByIdAsync(string id)
+        {
+            var result = await _banditService.DeleteByIdAsync(id);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PostAsync([FromBody]BanditDTO banditDTO)
+        {
+            var result = await _banditService.PostAsync(banditDTO);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
     }
 }
