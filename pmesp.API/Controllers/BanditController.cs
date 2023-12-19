@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using pmesp.Application.DTOs.Bandits;
 using pmesp.Application.Interfaces.Bandits;
 using pmesp.Domain.Entities.Bandits;
+using pmesp.Domain.Entities.Response;
 
 namespace pmesp.API.Controllers
 {
@@ -56,6 +57,12 @@ namespace pmesp.API.Controllers
                 return NotFound();
             }
             return Ok(banditDTO);
+        }
+
+        [HttpGet("nome/{id}")]
+        public async Task<Response<BanditDTO>> GetWithResponse(string id)
+        {
+            return await _banditService.GetBanditByName(id);
         }
 
 

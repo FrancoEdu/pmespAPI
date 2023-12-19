@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pmesp.Domain.Entities.Response;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace pmesp.Application.Interfaces.Base;
 
 public interface IBaseService<T>
 {
-    Task<IEnumerable<T>> GetAll();
-    Task<T> GetById(string id);
-    Task Add(T entity);
-    Task Update(T entity);
-    Task Delete(string id);
+    Task<Response<IEnumerable<T>>> GetAll();
+    Task<Response<T>> GetById(string id);
+    Task<Response<T>> Add(T entity);
+    Task<Response<T>> Update(T entity);
+    Task<Response<T>> Delete(string id);
 }

@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using pmesp.Application.DTOs.RGs;
 using pmesp.Application.Interfaces.RGs;
-using pmesp.Application.Services;
-using pmesp.Domain.Entities;
+using pmesp.Domain.Entities.RGs;
 
 namespace pmesp.API.Controllers
 {
@@ -33,7 +31,7 @@ namespace pmesp.API.Controllers
         }
 
         [HttpGet("{id}", Name = "GetRG")]
-        public async Task<ActionResult<RGsDTO>> Get(string id)
+        public async Task<ActionResult<RG>> Get(string id)
         {
             var rg = await _rgsService.GetById(id);
 
@@ -41,6 +39,35 @@ namespace pmesp.API.Controllers
             {
                 return NotFound();
             }
+            return Ok(rg);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<RG>> Delete(string id)
+        {
+            var rg = await _rgsService.GetById(id);
+            if(rg == null)
+            {
+                return NotFound("Nenhum RG encontrado com esse id");
+            }
+
+            await _rgsService.Delete(id);
+            return Ok(rg);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<RG>> Put(string id, [FromBody]RGsDTO rg)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id.Length < 0)
+            {
+                return BadRequest("Necessário o envio do token para validarmos");
+            }
+
+            await _rgsService.Update(rg);
             return Ok(rg);
         }
     }

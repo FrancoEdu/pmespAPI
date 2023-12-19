@@ -6,5 +6,7 @@ namespace pmesp.Domain.Interfaces.Bandits;
 public interface IBanditRepository : IRepository<Bandit>
 {
     Task<Bandit> GetByName(string name);
+    Task<Bandit> GetByEmailAsync(string name);
+    Task<Bandit> GetByCpfAsync(string cpf);
     Task<IEnumerable<Bandit>> GetAllInfos();
 }
