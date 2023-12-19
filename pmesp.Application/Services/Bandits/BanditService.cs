@@ -46,34 +46,28 @@ public class BanditService : IBanditService
         return _response;
     }
 
-    public async Task Delete(string id)
+    public async Task<Response<BanditDTO>> Delete(string id)
     {
-        var bandit = _banditRepository.GetByIdAsync(id).Result;
+        var bandit = await _banditRepository.GetByIdAsync(id);
+        if (bandit == null)
+        {
+            _response.setResponse(null, "Não encontramos nenhum bandido com esse identificador...", false, 400);
+            return _response;
+        }
         await _banditRepository.DeleteAsync(bandit);
+        _response.setResponse(null, "Bandido excluído com sucesso", true, 200);
+        return _response;
     }
 
-    public async Task<Response<IEnumerable<BanditDTO>>> GetAll()
+    public async Task<Response<BanditDTO>> GetAll()
     {
         var infos = await _banditRepository.GetAllAsync();
         var dto = _mapper.Map<IEnumerable<BanditDTO>>(infos);
-        return dto;
-    }
-
-    public async Task<Response<BanditDTO>> GetBanditAndRGs(string banditId)
-    {
-        var bandit = await _banditRepository.GetByIdAsync(banditId);
-        var banditDTO = _mapper.Map<BanditDTO>(bandit);
-        return banditDTO;
+        _response.setResponse(dto, "Lista de bandidos", true, 200);
+        return _response;
     }
 
     public async Task<Response<BanditDTO>> GetById(string id)
-    {
-        var bandit = await _banditRepository.GetByIdAsync(id);
-        var banditDTO = _mapper.Map<BanditDTO>(bandit);
-        return banditDTO;
-    }
-
-    public async Task<Response<BanditDTO>> GetBanditByName(string id)
     {
         var bandit = await _banditRepository.GetByIdAsync(id);
         if (bandit == null)
@@ -86,9 +80,37 @@ public class BanditService : IBanditService
         return _response;
     }
 
+    public async Task<Response<BanditDTO>> GetBanditByName(string name)
+    {
+        var bandit = await _banditRepository.GetByNameAsync(name);
+        if (bandit == null)
+        {
+            _response.setResponse(null, "Não encontramos nenhum bandido com esse nome...", false, 400);
+            return _response;
+        }
+        var banditDTO = _mapper.Map<BanditDTO>(bandit);
+        _response.setResponse(banditDTO, "Encontramos o bandido com esse identificador", true, 200);
+        return _response;
+    }
+
     public async Task<Response<BanditDTO>> Update(BanditDTO entity)
     {
+        var exists = await _banditRepository.GetByCpfAsync(entity.CPF);
+        if (exists != null)
+        {
+            _response.setResponse(null, "Já existe um Bandido cadastrado com esse CPF...", false, 400);
+            return _response;
+        }
+        var existsEmail = await _banditRepository.GetByEmailAsync(entity.Email);
+        if (existsEmail != null)
+        {
+            _response.setResponse(null, "Já existe um Bandido cadastrado com esse Email...", false, 400);
+            return _response;
+        }
+
         var bandit = _mapper.Map<Bandit>(entity);
         await _banditRepository.UpdateAsync(bandit);
+        _response.setResponse(entity, "Bandido atualizado!", true, 201);
+        return _response;
     }
 }
