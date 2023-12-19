@@ -26,6 +26,7 @@ public class CopController : ControllerBase
         _authenticateService = authenticateService;
     }
 
+    /*
     [HttpPost]
     public async Task<ActionResult<Token>> CreateAccountCop([FromBody] CopDTO cop)
     {
@@ -71,4 +72,5 @@ public class CopController : ControllerBase
             TokenJWT = token,
         };
     }
+    */
 }

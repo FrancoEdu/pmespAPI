@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using pmesp.Application.DTOs.Cops;
 using pmesp.Application.Interfaces.Cop;
-using pmesp.Domain.Entities.Cops;
 using pmesp.Domain.Interfaces.ICop;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace pmesp.Application.Services.Cops;
@@ -22,6 +18,7 @@ public class CopService : ICopService
         _repository = repository;
     }
 
+    /*
     public async Task Add(CopDTO entity)
     {
         var cop = _mapper.Map<Cop>(entity);
@@ -43,15 +40,16 @@ public class CopService : ICopService
     {
         var cop = _repository.GetByIdAsync(id).Result;
         await _repository.DeleteAsync(cop);
-    }
+    } */
 
-    public async Task<IEnumerable<CopDTO>> GetAll()
+    public async Task<ResultService<ICollection<CopDTO>>> GetAllAsync()
     {
         var cops = await _repository.GetAllAsync();
-        var copsDTO = _mapper.Map<IEnumerable<CopDTO>>(cops);
-        return copsDTO;
+        var copsDTO = _mapper.Map<ICollection<CopDTO>>(cops);
+        return ResultService.Ok<ICollection<CopDTO>>(copsDTO);
     }
 
+    /*
     public async Task<CopDTO> GetById(string id)
     {
         var cop = await _repository.GetByIdAsync(id);
@@ -64,4 +62,5 @@ public class CopService : ICopService
         var cop = _mapper.Map<Cop>(entity);
         await _repository.UpdateAsync(cop);
     }
+    */
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using pmesp.Domain.Entities.Cops;
+using pmesp.Domain.Interfaces.Base;
 using pmesp.Domain.Interfaces.ICop;
 using pmesp.Infrastructure.Context;
 
@@ -28,7 +29,7 @@ public class CopsRepository : ICopRepository
         return entity;
     }
 
-    public async Task<IEnumerable<Cop>> GetAllAsync()
+    public async Task<ICollection<Cop>> GetAllAsync()
     {
         return await _context.Cops.AsNoTracking().ToListAsync();
     }

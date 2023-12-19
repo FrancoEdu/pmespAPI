@@ -17,17 +17,10 @@ namespace pmesp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BanditDTO>>> Get()
+        public async Task<ActionResult> GetAllAsync()
         {
-            try
-            {
-                var bandits = await _banditService.GetAll();
-                return Ok(bandits);
-            }
-            catch
-            {
-                throw;
-            }
+            var result = await _banditService.GetAllAsync();
+            return result.Success ? Ok(result) : BadRequest(result);
         }
     }
 }

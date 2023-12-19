@@ -16,6 +16,7 @@ namespace pmesp.API.Controllers
             _rgsService = rgsService;
         }
 
+        /*
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] RGsDTO rgDto)
         {
@@ -70,5 +71,6 @@ namespace pmesp.API.Controllers
             await _rgsService.Update(rg);
             return Ok(rg);
         }
+        */
     }
 }

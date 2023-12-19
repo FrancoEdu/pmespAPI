@@ -29,7 +29,7 @@ public class RgRepository : IRgRepository
         return entity;
     }
 
-    public async Task<IEnumerable<RG>> GetAllAsync()
+    public async Task<ICollection<RG>> GetAllAsync()
     {
         return await _context.RGs.AsNoTracking().ToListAsync();
     }
