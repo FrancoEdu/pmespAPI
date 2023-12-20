@@ -26,29 +26,24 @@ public class CopController : ControllerBase
         _authenticateService = authenticateService;
     }
 
-    /*
     [HttpPost]
     public async Task<ActionResult<Token>> CreateAccountCop([FromBody] CopDTO cop)
     {
-        if (!ModelState.IsValid)
+        var result =  await _copService.PostAsync(cop);
+        
+        if(result.Success)
         {
-            return BadRequest(ModelState);
-        }
-
-        var emailExists = await _authenticateService.UserExists(cop.Email);
-
-        if(emailExists == false)
-        {
-            await _copService.Add(cop);
             var token = _authenticateService.GenerateToken(cop.Id, cop.Email);
-            return new Token { 
+            return new Token
+            {
                 TokenJWT = token,
             };
         }
 
-        return BadRequest("O Email já existe atribuído a outro policial..");
+        return BadRequest(result);
     }
 
+    /*
     [HttpPost("login")]
     public async Task<ActionResult<Token>> Login(Login credentials)
     {
