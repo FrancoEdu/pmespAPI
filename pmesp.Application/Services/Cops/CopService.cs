@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using pmesp.Application.DTOs.Cops;
 using pmesp.Application.Interfaces.Cop;
+using pmesp.Domain.Entities.Cops;
 using pmesp.Domain.Interfaces.ICop;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace pmesp.Application.Services.Cops;
@@ -49,7 +52,19 @@ public class CopService : ICopService
 
     public Task<ResultService<CopDTO>> PostAsync(CopDTO entity)
     {
-        throw new System.NotImplementedException();
+        var cop = _mapper.Map<Cop>(entity);
+
+        // Mapenando a pwd para pwdHash e Salt
+        if (cop != null)
+        {
+            using var hmac = new HMACSHA512();
+            byte[] pwdHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(entity.Password));
+            byte[] pwdSalt = hmac.Key;
+
+            cop.AlterarSenha(pwdHash, pwdSalt);
+        }
+
+        await _repository.CreateAsync(cop);
     }
 
 
