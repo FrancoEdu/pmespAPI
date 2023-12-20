@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
+using pmesp.API.Models.Logins;
+using pmesp.API.Models.Tokens;
 using pmesp.Application.DTOs.Bandits;
 using pmesp.Application.DTOs.Cops;
+using pmesp.Application.DTOs.Logins;
 using pmesp.Application.Interfaces.Cop;
 using pmesp.Domain.Entities.Cops;
 using pmesp.Domain.Entities.Cops.Account;
 using pmesp.Domain.Interfaces.ICop;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,29 +95,47 @@ public class CopService : ICopService
         return ResultService.Ok<CopDTO>(_mapper.Map<CopDTO>(copObject), "Policial cadastrado com sucesso");
     }
 
-
-    /*
-    public async Task Add(CopDTO entity)
+    public async Task<ResultService<TokenDTO>> LoginAsync(LoginDTO credentials)
     {
-        var cop = _mapper.Map<Cop>(entity);
-
-        // Mapenando a pwd para pwdHash e Salt
-        if(cop != null )
+        var result = await ValidateCopLogin(credentials);
+        if (result.Success)
         {
-            using var hmac = new HMACSHA512();
-            byte[] pwdHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(entity.Password));
-            byte[] pwdSalt = hmac.Key;
+            var cop = await _authenticateService.GetCopByEmail(credentials.Email);
+            var token = _authenticateService.GenerateToken(cop.Id, cop.Email);
+            var tokenDTO = new TokenDTO
+            {
+                TokenJWT = token,
+            };
+            return ResultService.Ok<TokenDTO>(tokenDTO, "Credenciais válidas");
+        }
+        return ResultService.Fail<TokenDTO>($"{result.Message}");
+    }
 
-            cop.AlterarSenha(pwdHash, pwdSalt);
+    public async Task<ResultService<LoginDTO>> ValidateCopLogin(LoginDTO credentials)
+    {
+        if (credentials == null)
+        {
+            return ResultService.Fail<LoginDTO>("Objeto enviado nulo");
         }
 
-        await _repository.CreateAsync(cop);
-    }
+        var result = new LoginValidator().Validate(credentials);
+        if (!result.IsValid)
+        {
+            return ResultService.RequestError<LoginDTO>("", result);
+        }
 
-    public async Task Update(CopDTO entity)
-    {
-        var cop = _mapper.Map<Cop>(entity);
-        await _repository.UpdateAsync(cop);
+        var exists = await _authenticateService.UserExists(credentials.Email);
+        if (!exists)
+        {
+            return ResultService.Fail<LoginDTO>("O email informado não existe em nenhum cadastro...");
+        }
+
+        var auth = await _authenticateService.AuthenticateAsync(credentials.Email, credentials.Password);
+        if (!auth)
+        {
+            return ResultService.Fail<LoginDTO>("Credenciais inválidas...");
+        }
+
+        return ResultService.Ok<LoginDTO>(credentials, "Cresenciais válidas");
     }
-    */
 }

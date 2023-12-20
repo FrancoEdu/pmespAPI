@@ -6,6 +6,7 @@ using pmesp.Application.DTOs.Bandits;
 using pmesp.Application.DTOs.Cops;
 using pmesp.Application.Interfaces.Cop;
 using pmesp.Domain.Entities.Bandits;
+using pmesp.Domain.Entities.Cops;
 using pmesp.Domain.Entities.Cops.Account;
 
 namespace pmesp.API.Controllers;
@@ -27,14 +28,14 @@ public class CopController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Token>> CreateAccountCop([FromBody] CopDTO cop)
+    public async Task<ActionResult<TokenDTO>> CreateAccountCop([FromBody] CopDTO cop)
     {
         var result =  await _copService.PostAsync(cop);
         
         if(result.Success)
         {
             var token = _authenticateService.GenerateToken(cop.Id, cop.Email);
-            return new Token
+            return new TokenDTO
             {
                 TokenJWT = token,
             };
@@ -43,29 +44,10 @@ public class CopController : ControllerBase
         return BadRequest(result);
     }
 
-    /*
     [HttpPost("login")]
-    public async Task<ActionResult<Token>> Login(Login credentials)
+    public async Task<ActionResult<TokenDTO>> Login(LoginDTO credentials)
     {
-        var exists = await _authenticateService.UserExists(credentials.Email);
-
-        if(!exists)
-        {
-            return Unauthorized("Conta com o email informado não existe...");
-        }
-
-        var result = await _authenticateService.AuthenticateAsync(credentials.Email, credentials.Password);
-        if (!result)
-        {
-            return BadRequest("Usuário ou senha inválidos");
-        }
-
-        var cop = await _authenticateService.GetCopByEmail(credentials.Email);
-        var token = _authenticateService.GenerateToken(cop.Id, credentials.Email);
-        return new Token
-        {
-            TokenJWT = token,
-        };
+        var result = await _copService.LoginAsync(credentials);
+        return result.Success ? Ok(result) : BadRequest(result);
     }
-    */
 }

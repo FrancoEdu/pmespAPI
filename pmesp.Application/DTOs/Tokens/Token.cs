@@ -1,6 +1,6 @@
 ﻿namespace pmesp.API.Models.Tokens;
 
-public class Token
+public class TokenDTO
 {
     public string TokenJWT {  get; set; }
 }
