@@ -43,4 +43,11 @@ public class BanditController : ControllerBase
         var result = await _banditService.PostAsync(banditDTO);
         return result.Success ? Ok(result) : BadRequest(result);
     }
+
+    [HttpPost("address")]
+    public async Task<ActionResult> PostAddressUsingBanditIdAsync([FromBody]BanditAddressDTO banditAddressDTO)
+    {
+        var result = await _banditService.PostAddressUsingBanditId(banditAddressDTO);
+        return result.Success ? Ok(result) : BadRequest(result);
+    }
 }

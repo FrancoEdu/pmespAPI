@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using pmesp.Domain.Entities.Addresses;
+using pmesp.Domain.Entities.AssociateAddress;
 using pmesp.Domain.Interfaces.IAddress;
 using pmesp.Infrastructure.Context;
 
@@ -31,9 +32,16 @@ public class AddressRepository : IAddressRepository
     public async Task<ICollection<Address>> GetAddressesByBanditIdAsync(string banditId)
     {
         return await _context.AddressBandit
-        .Where(aa => aa.BanditsId == banditId)
-        .Select(aa => aa.Address)
-        .ToListAsync();
+                    .AsNoTracking()
+                    .Where(aa => aa.BanditsId == banditId)
+                    .Select(aa => aa.Address)
+                    .ToListAsync();
+    }
+    public async Task<Address> PostAddressUsingBanditIdAsync(AssociateAddresses associateAddresses)
+    {
+        _context.AddressBandit.Add(associateAddresses);
+        await _context.SaveChangesAsync();
+        return await GetByIdAsync(associateAddresses.AddressesId);
     }
 
     public async Task<ICollection<Address>> GetAllAsync()
@@ -52,6 +60,7 @@ public class AddressRepository : IAddressRepository
                 .Include(x => x.Bandits)
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
+
 
     public async Task<Address> UpdateAsync(Address entity)
     {

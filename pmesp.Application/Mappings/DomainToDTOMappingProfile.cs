@@ -20,6 +20,8 @@ public class DomainToDTOMappingProfile : Profile
         CreateMap<RG, RGsDTO>().ReverseMap();
         CreateMap<Cop, CopDTO>().ReverseMap();
         CreateMap<Address, AddressDTO>().ReverseMap();
+        CreateMap<Address, BanditAddressDTO>().ReverseMap();
+        CreateMap<AddressDTO, BanditAddressDTO>().ReverseMap();
         CreateMap<AssociateAddresses,AssociateAddressDTO>().ReverseMap();
     }
 }
