@@ -10,9 +10,4 @@ public class AssociateAddresses
     public string AddressesId { get; private set; }
     public Address Address { get; private set; }
 
-    public AssociateAddresses(string banditId, string addressId)
-    {
-        BanditsId = banditId;
-        AddressesId = addressId;
-    }
 }

@@ -69,7 +69,6 @@ public class BanditRepository : IBanditRepository
                 .Bandits
                 .AsNoTracking()
                 .Include(rg => rg.rGs)
-                .Include(end => end.Addresses)
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 

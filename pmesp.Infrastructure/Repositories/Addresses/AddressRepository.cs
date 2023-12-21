@@ -28,6 +28,14 @@ public class AddressRepository : IAddressRepository
         return entity;
     }
 
+    public async Task<ICollection<Address>> GetAddressesByBanditIdAsync(string banditId)
+    {
+        return await _context.AddressBandit
+        .Where(aa => aa.BanditsId == banditId)
+        .Select(aa => aa.Address)
+        .ToListAsync();
+    }
+
     public async Task<ICollection<Address>> GetAllAsync()
     {
         return await _context

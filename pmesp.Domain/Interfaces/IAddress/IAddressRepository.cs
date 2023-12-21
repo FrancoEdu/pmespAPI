@@ -5,4 +5,5 @@ namespace pmesp.Domain.Interfaces.IAddress;
 
 public interface IAddressRepository : IRepository<Address>
 {
+    Task<ICollection<Address>> GetAddressesByBanditIdAsync(string banditId);
 }
