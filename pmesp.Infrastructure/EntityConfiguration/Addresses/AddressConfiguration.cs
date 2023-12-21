@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using pmesp.Domain.Entities.Addresses;
-using pmesp.Domain.Entities.Bandits;
 
 namespace pmesp.Infrastructure.EntityConfiguration.Addresses;
 

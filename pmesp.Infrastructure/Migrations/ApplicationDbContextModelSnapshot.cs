@@ -19,6 +19,21 @@ namespace pmesp.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("AddressBandit", b =>
+                {
+                    b.Property<string>("AddressesId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("BanditsId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("AddressesId", "BanditsId");
+
+                    b.HasIndex("BanditsId");
+
+                    b.ToTable("AddressBandit");
+                });
+
             modelBuilder.Entity("pmesp.Domain.Entities.Addresses.Address", b =>
                 {
                     b.Property<string>("Id")
@@ -53,21 +68,6 @@ namespace pmesp.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("pmesp.Domain.Entities.BanditAddresses.BanditAddress", b =>
-                {
-                    b.Property<string>("BanditId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("AddressId")
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("BanditId", "AddressId");
-
-                    b.HasIndex("AddressId");
-
-                    b.ToTable("BanditAddresses");
                 });
 
             modelBuilder.Entity("pmesp.Domain.Entities.Bandits.Bandit", b =>
@@ -181,23 +181,19 @@ namespace pmesp.Infrastructure.Migrations
                     b.ToTable("RGs");
                 });
 
-            modelBuilder.Entity("pmesp.Domain.Entities.BanditAddresses.BanditAddress", b =>
+            modelBuilder.Entity("AddressBandit", b =>
                 {
-                    b.HasOne("pmesp.Domain.Entities.Addresses.Address", "Address")
-                        .WithMany("banditAddresses")
-                        .HasForeignKey("AddressId")
+                    b.HasOne("pmesp.Domain.Entities.Addresses.Address", null)
+                        .WithMany()
+                        .HasForeignKey("AddressesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("pmesp.Domain.Entities.Bandits.Bandit", "Bandit")
-                        .WithMany("banditAddresses")
-                        .HasForeignKey("BanditId")
+                    b.HasOne("pmesp.Domain.Entities.Bandits.Bandit", null)
+                        .WithMany()
+                        .HasForeignKey("BanditsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Address");
-
-                    b.Navigation("Bandit");
                 });
 
             modelBuilder.Entity("pmesp.Domain.Entities.RGs.RG", b =>
@@ -211,15 +207,8 @@ namespace pmesp.Infrastructure.Migrations
                     b.Navigation("Bandit");
                 });
 
-            modelBuilder.Entity("pmesp.Domain.Entities.Addresses.Address", b =>
-                {
-                    b.Navigation("banditAddresses");
-                });
-
             modelBuilder.Entity("pmesp.Domain.Entities.Bandits.Bandit", b =>
                 {
-                    b.Navigation("banditAddresses");
-
                     b.Navigation("rGs");
                 });
 #pragma warning restore 612, 618

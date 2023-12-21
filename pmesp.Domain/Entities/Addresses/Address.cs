@@ -1,6 +1,6 @@
-﻿using pmesp.Domain.Entities.BanditAddresses;
-using pmesp.Domain.Entities.Bandits;
+﻿using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Validations;
+using System.Text.Json.Serialization;
 
 namespace pmesp.Domain.Entities.Addresses;
 
@@ -13,12 +13,12 @@ public class Address
     public string City { get; private set; }
     public string State { get; private set; }
     public string Country { get; private set; }
-    public ICollection<BanditAddress> Bandits { get; private set; }
+    public ICollection<Bandit> Bandits { get; private set; }
 
     public Address(string id, string name, string? description, string zipCode, string city, string state, string country)
     {
         Id = id;
-        Bandits = new List<BanditAddress>();
+        Bandits = new List<Bandit>();
         ValidateDomain(name, description, zipCode, city, state, country);
     }
 

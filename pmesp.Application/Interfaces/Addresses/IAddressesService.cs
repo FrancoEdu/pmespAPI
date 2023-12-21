@@ -1,5 +1,4 @@
 ﻿using pmesp.Application.DTOs.Addresses;
-using pmesp.Application.DTOs.BanditAddresses;
 using pmesp.Application.Services;
 using System.Threading.Tasks;
 

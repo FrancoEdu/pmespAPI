@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using pmesp.Application.DTOs.Addresses;
-using pmesp.Application.DTOs.BanditAddresses;
+using pmesp.Application.DTOs.Bandits;
 using pmesp.Application.Interfaces.Addresses;
 using pmesp.Domain.Entities.Addresses;
-using pmesp.Domain.Entities.BanditAddresses;
+using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Interfaces.IAddress;
 using System.Threading.Tasks;
 
@@ -33,8 +33,7 @@ public class AddressService : IAddressesService
             ResultService.RequestError<AddressDTO>("Erros de validação", result);
         }
 
-        var dto = _mapper.Map<Address>(entity);
-        await _addressRepository.CreateAsync(dto);
-        return ResultService.Ok<AddressDTO>(_mapper.Map<AddressDTO>(dto), "Criado com sucesso");
+        var bandit = await _addressRepository.CreateAsync(_mapper.Map<Address>(entity));
+        return ResultService.Ok<AddressDTO>(_mapper.Map<AddressDTO>(bandit), "Endereço cadastrado com sucesso");
     }
 }

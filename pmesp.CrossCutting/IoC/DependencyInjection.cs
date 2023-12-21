@@ -4,26 +4,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using pmesp.Application.Interfaces.Addresses;
-using pmesp.Application.Interfaces.BanditAddresses;
 using pmesp.Application.Interfaces.Bandits;
 using pmesp.Application.Interfaces.Cop;
 using pmesp.Application.Interfaces.RGs;
 using pmesp.Application.Mappings;
 using pmesp.Application.Services.Addresses;
-using pmesp.Application.Services.BanditAddresses;
 using pmesp.Application.Services.Bandits;
 using pmesp.Application.Services.Cops;
 using pmesp.Application.Services.RGs;
 using pmesp.Domain.Entities.Cops.Account;
 using pmesp.Domain.Interfaces.Bandits;
 using pmesp.Domain.Interfaces.IAddress;
-using pmesp.Domain.Interfaces.IBanditAddresses;
 using pmesp.Domain.Interfaces.ICop;
 using pmesp.Domain.Interfaces.Irg;
 using pmesp.Infrastructure.Context;
 using pmesp.Infrastructure.Identity;
 using pmesp.Infrastructure.Repositories.Addresses;
-using pmesp.Infrastructure.Repositories.BanditAddresses;
 using pmesp.Infrastructure.Repositories.Bandits;
 using pmesp.Infrastructure.Repositories.Cops;
 using pmesp.Infrastructure.Repositories.RGs;
@@ -65,7 +61,6 @@ public static class DependencyInjection
         services.AddScoped<IRgRepository, RgRepository>();
         services.AddScoped<ICopRepository, CopsRepository>();
         services.AddScoped<IAddressRepository, AddressRepository>();
-        services.AddScoped<IBanditAddressesRepository, BanditAddressesRepository>();
         services.AddScoped<IAuthenticate, IdentityRepository>();
         
         // Services
@@ -73,7 +68,6 @@ public static class DependencyInjection
         services.AddScoped<IRgsService,RgService>();
         services.AddScoped<ICopService,CopService>();
         services.AddScoped<IAddressesService, AddressService>();
-        services.AddScoped<IBanditAddressService, BanditAddressService>();
 
 
         return services;

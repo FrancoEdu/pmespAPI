@@ -17,7 +17,7 @@ public class AddressController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> PostAsync(AddressDTO address)
+    public async Task<ActionResult> PostAsync([FromBody]AddressDTO address)
     {
         var result = await _addressesService.PostAsync(address);
         return result.Success ? Ok(result) : BadRequest(result);
