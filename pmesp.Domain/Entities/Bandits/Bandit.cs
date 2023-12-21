@@ -1,4 +1,6 @@
-﻿using pmesp.Domain.Entities.RGs;
+﻿using pmesp.Domain.Entities.Addresses;
+using pmesp.Domain.Entities.BanditAddresses;
+using pmesp.Domain.Entities.RGs;
 using pmesp.Domain.Validations;
 
 namespace pmesp.Domain.Entities.Bandits;
@@ -16,6 +18,7 @@ public class Bandit
     public float? Weight { get; private set; }
     public float? Height { get; private set; }
     public ICollection<RG> rGs { get; private set; }
+    public ICollection<BanditAddress> Addresses { get; private set; }
     public Bandit(
         string id,
         string name,
@@ -30,6 +33,7 @@ public class Bandit
     {
         Id = id;
         rGs = new List<RG>();
+        Addresses = new List<BanditAddress>();
         ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height);
     }
 
