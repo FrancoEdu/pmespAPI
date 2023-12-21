@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pmesp.Infrastructure.Context;
 
@@ -10,14 +11,31 @@ using pmesp.Infrastructure.Context;
 namespace pmesp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231221015812_ajustandoRelacionamentos")]
+    partial class ajustandoRelacionamentos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("AddressBandit", b =>
+                {
+                    b.Property<string>("AddressesId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("BanditsId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("AddressesId", "BanditsId");
+
+                    b.HasIndex("BanditsId");
+
+                    b.ToTable("AddressBandit");
+                });
 
             modelBuilder.Entity("pmesp.Domain.Entities.Addresses.Address", b =>
                 {
@@ -53,21 +71,6 @@ namespace pmesp.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("pmesp.Domain.Entities.AssociateAddress.AssociateAddresses", b =>
-                {
-                    b.Property<string>("AddressesId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("BanditsId")
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("AddressesId", "BanditsId");
-
-                    b.HasIndex("BanditsId");
-
-                    b.ToTable("AddressBandit");
                 });
 
             modelBuilder.Entity("pmesp.Domain.Entities.Bandits.Bandit", b =>
@@ -181,23 +184,19 @@ namespace pmesp.Infrastructure.Migrations
                     b.ToTable("RGs");
                 });
 
-            modelBuilder.Entity("pmesp.Domain.Entities.AssociateAddress.AssociateAddresses", b =>
+            modelBuilder.Entity("AddressBandit", b =>
                 {
-                    b.HasOne("pmesp.Domain.Entities.Addresses.Address", "Address")
-                        .WithMany("Bandits")
+                    b.HasOne("pmesp.Domain.Entities.Addresses.Address", null)
+                        .WithMany()
                         .HasForeignKey("AddressesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("pmesp.Domain.Entities.Bandits.Bandit", "Bandit")
-                        .WithMany("Addresses")
+                    b.HasOne("pmesp.Domain.Entities.Bandits.Bandit", null)
+                        .WithMany()
                         .HasForeignKey("BanditsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Address");
-
-                    b.Navigation("Bandit");
                 });
 
             modelBuilder.Entity("pmesp.Domain.Entities.RGs.RG", b =>
@@ -211,15 +210,8 @@ namespace pmesp.Infrastructure.Migrations
                     b.Navigation("Bandit");
                 });
 
-            modelBuilder.Entity("pmesp.Domain.Entities.Addresses.Address", b =>
-                {
-                    b.Navigation("Bandits");
-                });
-
             modelBuilder.Entity("pmesp.Domain.Entities.Bandits.Bandit", b =>
                 {
-                    b.Navigation("Addresses");
-
                     b.Navigation("rGs");
                 });
 #pragma warning restore 612, 618

@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using pmesp.Domain.Entities.Addresses;
+using pmesp.Domain.Entities.AssociateAddress;
 using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Entities.Cops;
 using pmesp.Domain.Entities.RGs;
@@ -9,6 +11,8 @@ public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions options): base(options){}
     public DbSet<Bandit> Bandits { get; set; }
+    public DbSet<AssociateAddresses> AddressBandit {  get; set; }
+    public DbSet<Address> Addresses { get; set; }
     public DbSet<RG> RGs { get; set; }
     public DbSet<Cop> Cops { get; set; }
 
