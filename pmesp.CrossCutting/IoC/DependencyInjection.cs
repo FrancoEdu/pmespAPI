@@ -7,12 +7,15 @@ using pmesp.Application.Interfaces.Addresses;
 using pmesp.Application.Interfaces.Bandits;
 using pmesp.Application.Interfaces.Cop;
 using pmesp.Application.Interfaces.RGs;
+using pmesp.Application.Interfaces.Tattoos;
 using pmesp.Application.Mappings;
 using pmesp.Application.Services.Addresses;
 using pmesp.Application.Services.Bandits;
 using pmesp.Application.Services.Cops;
 using pmesp.Application.Services.RGs;
+using pmesp.Application.Services.Tattoos;
 using pmesp.Domain.Entities.Cops.Account;
+using pmesp.Domain.Interfaces;
 using pmesp.Domain.Interfaces.Bandits;
 using pmesp.Domain.Interfaces.IAddress;
 using pmesp.Domain.Interfaces.ICop;
@@ -23,6 +26,7 @@ using pmesp.Infrastructure.Repositories.Addresses;
 using pmesp.Infrastructure.Repositories.Bandits;
 using pmesp.Infrastructure.Repositories.Cops;
 using pmesp.Infrastructure.Repositories.RGs;
+using pmesp.Infrastructure.Repositories.Tattoos;
 using System;
 using System.Text;
 
@@ -61,6 +65,7 @@ public static class DependencyInjection
         services.AddScoped<IRgRepository, RgRepository>();
         services.AddScoped<ICopRepository, CopsRepository>();
         services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<ITattooRepository, TattooRepository>();
         services.AddScoped<IAuthenticate, IdentityRepository>();
         
         // Services
@@ -68,6 +73,7 @@ public static class DependencyInjection
         services.AddScoped<IRgsService,RgService>();
         services.AddScoped<ICopService,CopService>();
         services.AddScoped<IAddressesService, AddressService>();
+        services.AddScoped<ITattooService, TattooService>();
 
 
         return services;

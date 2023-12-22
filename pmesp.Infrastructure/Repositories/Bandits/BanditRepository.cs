@@ -39,7 +39,6 @@ public class BanditRepository : IBanditRepository
                 .Bandits
                 .AsNoTracking()
                 .Include(rg => rg.rGs)
-                .Include(end => end.Addresses)
                 .ToListAsync();
     }
 
@@ -49,7 +48,6 @@ public class BanditRepository : IBanditRepository
                 Bandits
                 .AsNoTracking()
                 .Include(rg => rg.rGs)
-                .Include(end => end.Addresses)
                 .FirstOrDefaultAsync(x => x.CPF.Equals(cpf));
     }
 
@@ -59,7 +57,6 @@ public class BanditRepository : IBanditRepository
                 .Bandits
                 .AsNoTracking()
                 .Include(rg => rg.rGs)
-                .Include(end => end.Addresses)
                 .FirstOrDefaultAsync(x => x.Email.Equals(email));
     }
 
@@ -69,6 +66,7 @@ public class BanditRepository : IBanditRepository
                 .Bandits
                 .AsNoTracking()
                 .Include(rg => rg.rGs)
+                .Include(t => t.Tattoos)
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 
