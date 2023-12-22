@@ -15,9 +15,9 @@ public class Tattoo
     public string BanditId { get; set; }
     public Bandit Bandit { get; set; }
 
-    public Tattoo(string name, string bodyLocation, bool colored, string? description, string banditId)
+    public Tattoo(string id, string name, string bodyLocation, bool colored, string? description, string banditId)
     {
-        Id = Guid.NewGuid().ToString();
+        Id = id;
         ValidateDomain(name, bodyLocation, colored, description, banditId);
     }
 

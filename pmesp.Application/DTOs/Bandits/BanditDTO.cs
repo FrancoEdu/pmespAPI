@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using pmesp.Application.DTOs.Addresses;
 using pmesp.Application.DTOs.RGs;
+using pmesp.Application.DTOs.Tattoos;
 
 namespace pmesp.Application.DTOs.Bandits;
 
@@ -20,5 +21,6 @@ public class BanditDTO
     public float? Weight { get; set; }
     public float? Height { get; set; }
     public ICollection<RGsDTO> RGs { get; set; }
+    public ICollection<TattooDTO> Tattoos { get; set; }
     public ICollection<AddressDTO> Addresses { get; set; }
 }
