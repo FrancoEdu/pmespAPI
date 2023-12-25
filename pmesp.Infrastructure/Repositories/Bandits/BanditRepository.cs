@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using pmesp.Domain.Entities.Bandits;
+using pmesp.Domain.Entities.Search;
 using pmesp.Domain.Interfaces.Bandits;
 using pmesp.Infrastructure.Context;
 
@@ -12,6 +13,25 @@ public class BanditRepository : IBanditRepository
     public BanditRepository(ApplicationDbContext context)
     {
         _context = context;
+    }
+
+    public async Task<string> Base64PrincipalPhoto(Bandit entity)
+    {
+        string imagePath = entity.PrincipalPhoto;
+        try
+        {
+            if (string.IsNullOrEmpty(imagePath))
+            {
+                return null;
+            }
+            byte[] imageBytes = await File.ReadAllBytesAsync(imagePath);
+            string base64String = Convert.ToBase64String(imageBytes);
+            return base64String;
+        }
+        catch (FileNotFoundException)
+        {
+            return null;
+        }
     }
 
     public async Task<Bandit> CreateAsync(Bandit entity)
@@ -80,10 +100,43 @@ public class BanditRepository : IBanditRepository
             .FirstOrDefaultAsync(x => x.Name.Equals(name));
     }
 
+
     public async Task<Bandit> UpdateAsync(Bandit entity)
     {
         _context.Update(entity);
         await _context.SaveChangesAsync();
         return entity;
+    }
+
+    public async Task<Bandit> UpdatePhotoAsync(Bandit bandit, string photoPath, string extension)
+    {
+        bandit.UpdateBanditFoto(photoPath, extension);
+        _context.Update(bandit);
+        await _context.SaveChangesAsync();
+        return bandit;
+    }
+    public async Task<ICollection<Bandit>> SearchAsync(Searchs searchs)
+    {
+        int quantityOnDisplay = searchs.QuantityOnDisplay ?? 10;
+        int page = searchs.Page ?? 1;
+
+        IQueryable<Bandit> query = _context.Bandits.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(searchs.Similarity))
+        {
+            query = query.Where(b =>
+                EF.Functions.Like(b.Name, $"%{searchs.Similarity}%") ||
+                EF.Functions.Like(b.Surname, $"%{searchs.Similarity}%") ||
+                EF.Functions.Like(b.CPF, $"%{searchs.Similarity}%")
+            );
+        }
+
+        var result = await query
+            .OrderBy(b => b.Name)
+            .Skip(quantityOnDisplay * (page - 1))
+            .Take(quantityOnDisplay)
+            .ToListAsync();
+
+        return result;
     }
 }

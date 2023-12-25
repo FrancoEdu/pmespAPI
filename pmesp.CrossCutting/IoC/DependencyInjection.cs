@@ -75,6 +75,17 @@ public static class DependencyInjection
         services.AddScoped<IAddressesService, AddressService>();
         services.AddScoped<ITattooService, TattooService>();
 
+        //CORS
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowSpecificOrigin",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+        });
 
         return services;
     }

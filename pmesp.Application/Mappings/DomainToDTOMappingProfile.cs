@@ -4,12 +4,14 @@ using pmesp.Application.DTOs.AssociateAddress;
 using pmesp.Application.DTOs.Bandits;
 using pmesp.Application.DTOs.Cops;
 using pmesp.Application.DTOs.RGs;
+using pmesp.Application.DTOs.SearchDTO;
 using pmesp.Application.DTOs.Tattoos;
 using pmesp.Domain.Entities.Addresses;
 using pmesp.Domain.Entities.AssociateAddress;
 using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Entities.Cops;
 using pmesp.Domain.Entities.RGs;
+using pmesp.Domain.Entities.Search;
 using pmesp.Domain.Entities.Tattoos;
 
 namespace pmesp.Application.Mappings;
@@ -26,5 +28,6 @@ public class DomainToDTOMappingProfile : Profile
         CreateMap<AddressDTO, BanditAddressDTO>().ReverseMap();
         CreateMap<AssociateAddresses,AssociateAddressDTO>().ReverseMap();
         CreateMap<Tattoo, TattooDTO>().ReverseMap();
+        CreateMap<Searchs, SearchDTO>().ReverseMap();
     }
 }

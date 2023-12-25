@@ -20,6 +20,7 @@ public class BanditDTO
     public string? Surname { get; set; }
     public float? Weight { get; set; }
     public float? Height { get; set; }
+    public string PhotoPath { get; set; }
     public ICollection<RGsDTO> RGs { get; set; }
     public ICollection<TattooDTO> Tattoos { get; set; }
     public ICollection<AddressDTO> Addresses { get; set; }

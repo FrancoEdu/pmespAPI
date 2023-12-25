@@ -18,5 +18,7 @@ internal class BanditConfiguration : IEntityTypeConfiguration<Bandit>
         builder.Property(x => x.Height);
         builder.Property(x => x.Weight);
         builder.Property(x => x.Surname);
+        builder.Property(x => x.PrincipalPhoto);
+        builder.Property(x => x.ExtensionPhoto);
     }
 }

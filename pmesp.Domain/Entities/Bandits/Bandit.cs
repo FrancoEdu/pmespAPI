@@ -19,9 +19,16 @@ public class Bandit
     public string? Surname { get; private set; }
     public float? Weight { get; private set; }
     public float? Height { get; private set; }
+    public string? PrincipalPhoto { get; private set; }
+    public string? ExtensionPhoto { get; private set; } 
     public ICollection<Tattoo> Tattoos { get; private set; }
     public ICollection<RG> rGs { get; private set; }
     public ICollection<AssociateAddresses> Addresses { get; private set; }
+
+    public Bandit()
+    {
+        
+    }
     public Bandit(
         string id,
         string name,
@@ -32,13 +39,15 @@ public class Bandit
         string? email,
         string? surname,
         float? weight,
-        float? height)
+        float? height,
+        string? photo,
+        string? extension)
     {
         Id = id;
         rGs = new List<RG>();
         Tattoos = new List<Tattoo>();
         Addresses = new List<AssociateAddresses>();
-        ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height);
+        ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height, photo, extension);
     }
 
     public void Update(string name,
@@ -49,9 +58,17 @@ public class Bandit
         string? email,
         string? surname,
         float? weight,
-        float? height)
+        float? height,
+        string? photo,
+        string? extension)
     {
-        ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height);
+        ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height, photo, extension);
+    }
+
+    public void UpdateBanditFoto(string photo, string extension)
+    {
+        PrincipalPhoto = photo;
+        ExtensionPhoto = extension;
     }
 
     public void ValidateDomain(string name,
@@ -62,7 +79,9 @@ public class Bandit
         string? email,
         string? surname,
         float? weight,
-        float? height)
+        float? height,
+        string? photo,
+        string? extension)
     {
         DomainExceptionValidation.When(name.Length > 30, "O nome não pode ultrapassar os 30 caracteres");
         if(description != null)
@@ -92,5 +111,7 @@ public class Bandit
         Surname = surname;
         Weight = weight;
         Height = height;
+        PrincipalPhoto = photo;
+        ExtensionPhoto = extension;
     }
 }
