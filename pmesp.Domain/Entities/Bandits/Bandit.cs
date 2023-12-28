@@ -20,7 +20,21 @@ public class Bandit
     public float? Weight { get; private set; }
     public float? Height { get; private set; }
     public string? PrincipalPhoto { get; private set; }
-    public string? ExtensionPhoto { get; private set; } 
+    public string? ExtensionPhoto { get; private set; }
+    public string? Nationality { get; private set; }
+    public string? Naturalness { get; private set; }
+    public string? MaritalStatus { get; private set; }
+    public string? CriminalSituation { get; private set; }
+    public string? ORCRIM { get; private set; }
+    public string? CrimeFunction { get; private set; }
+    public string? Profession { get; private set; }
+    public string? CriminalRG { get; private set; }
+    public string? ChainRegistration { get; private set; }
+    public string? OperationPhone { get; private set; }
+    public string? WhatsApp { get; private set; }
+    public string? PixEmail { get; private set; }
+    public string? PixPhone { get; private set; }
+    public string? PixCPF { get; private set; }
     public ICollection<Tattoo> Tattoos { get; private set; }
     public ICollection<RG> rGs { get; private set; }
     public ICollection<AssociateAddresses> Addresses { get; private set; }
@@ -41,13 +55,27 @@ public class Bandit
         float? weight,
         float? height,
         string? photo,
-        string? extension)
+        string? extension,
+        string? nationality, 
+        string? naturalness, 
+        string? maritalStatus, 
+        string? criminalSituation, 
+        string? oRCRIM, 
+        string? crimeFunction, 
+        string? profession, 
+        string? criminalRG, 
+        string? chainRegistration, 
+        string? operationPhone, 
+        string? whatsApp, 
+        string? pixEmail, 
+        string? pixPhone, 
+        string? pixCPF)
     {
         Id = id;
         rGs = new List<RG>();
         Tattoos = new List<Tattoo>();
         Addresses = new List<AssociateAddresses>();
-        ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height, photo, extension);
+        ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height, photo, extension, nationality, naturalness, maritalStatus, criminalSituation, oRCRIM, crimeFunction, profession, criminalRG, chainRegistration, operationPhone, whatsApp, pixEmail, pixPhone, pixCPF);
     }
 
     public void Update(string name,
@@ -60,9 +88,23 @@ public class Bandit
         float? weight,
         float? height,
         string? photo,
-        string? extension)
+        string? extension,
+        string? nationality,
+        string? naturalness,
+        string? maritalStatus,
+        string? criminalSituation,
+        string? oRCRIM,
+        string? crimeFunction,
+        string? profession,
+        string? criminalRG,
+        string? chainRegistration,
+        string? operationPhone,
+        string? whatsApp,
+        string? pixEmail,
+        string? pixPhone,
+        string? pixCPF)
     {
-        ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height, photo, extension);
+        ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height, photo, extension, nationality, naturalness, maritalStatus, criminalSituation, oRCRIM, crimeFunction, profession, criminalRG, chainRegistration, operationPhone, whatsApp, pixEmail, pixPhone, pixCPF);
     }
 
     public void UpdateBanditFoto(string photo, string extension)
@@ -81,7 +123,21 @@ public class Bandit
         float? weight,
         float? height,
         string? photo,
-        string? extension)
+        string? extension,
+        string? nationality,
+        string? naturalness,
+        string? maritalStatus,
+        string? criminalSituation,
+        string? oRCRIM,
+        string? crimeFunction,
+        string? profession,
+        string? criminalRG,
+        string? chainRegistration,
+        string? operationPhone,
+        string? whatsApp,
+        string? pixEmail,
+        string? pixPhone,
+        string? pixCPF)
     {
         DomainExceptionValidation.When(name.Length > 30, "O nome não pode ultrapassar os 30 caracteres");
         if(description != null)
@@ -113,5 +169,19 @@ public class Bandit
         Height = height;
         PrincipalPhoto = photo;
         ExtensionPhoto = extension;
+        Nationality = nationality;
+        Naturalness = naturalness;
+        MaritalStatus = maritalStatus;
+        ORCRIM = oRCRIM;
+        CrimeFunction = crimeFunction;
+        Profession = profession;
+        CriminalRG = criminalRG;
+        ChainRegistration = chainRegistration;
+        CriminalSituation = criminalSituation;
+        OperationPhone = operationPhone;
+        WhatsApp = whatsApp;
+        PixEmail = pixEmail;
+        PixPhone = pixPhone;
+        PixCPF = pixCPF;
     }
 }

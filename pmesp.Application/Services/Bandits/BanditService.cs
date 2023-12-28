@@ -52,7 +52,7 @@ public class BanditService : IBanditService
         }
         var banditDTO = _mapper.Map<BanditDTO>(bandit);
         banditDTO.Addresses = _mapper.Map<ICollection<AddressDTO>>(await _addressRepository.GetAddressesByBanditIdAsync(id));
-        banditDTO.PhotoPath = await _banditRepository.Base64PrincipalPhoto(bandit);
+        banditDTO.PrincipalPhoto = await _banditRepository.Base64PrincipalPhoto(bandit);
 
         return ResultService.Ok<BanditDTO>(banditDTO, "Bandido encontrado com sucesso");
     }
@@ -151,6 +151,15 @@ public class BanditService : IBanditService
         var search = _mapper.Map<Searchs>(searchDTO);
         var infos = await _banditRepository.SearchAsync(search);
         var dto = _mapper.Map<ICollection<BanditDTO>>(infos);
-        return ResultService.Ok<ICollection<BanditDTO>>(dto, "Lista de bandidos");
+        foreach (var item in dto)
+        {
+            var bandit = _mapper.Map<Bandit>(item);
+            if (bandit.PrincipalPhoto != null)
+            {
+                item.PrincipalPhoto = await _banditRepository.Base64PrincipalPhoto(bandit);
+            }
+        }
+        var total = await _banditRepository.GetAllAsync();
+        return ResultService.Ok<ICollection<BanditDTO>>(dto, "Lista de bandidos", total.Count());
     }
 }
