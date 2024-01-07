@@ -1,7 +1,10 @@
 ﻿using pmesp.Domain.Entities.Addresses;
 using pmesp.Domain.Entities.AssociateAddress;
+using pmesp.Domain.Entities.Guns;
 using pmesp.Domain.Entities.RGs;
+using pmesp.Domain.Entities.SocialMedias;
 using pmesp.Domain.Entities.Tattoos;
+using pmesp.Domain.Entities.Vehicles;
 using pmesp.Domain.Validations;
 using System.Text.Json.Serialization;
 
@@ -37,6 +40,9 @@ public class Bandit
     public string? PixCPF { get; private set; }
     public ICollection<Tattoo> Tattoos { get; private set; }
     public ICollection<RG> rGs { get; private set; }
+    public ICollection<Vehicle> Vehicles { get; private set; }
+    public ICollection<Gun> Guns { get; private set; }
+    public ICollection<SocialMedia> SocialMedias { get; private set; }
     public ICollection<AssociateAddresses> Addresses { get; private set; }
 
     public Bandit()
@@ -75,6 +81,9 @@ public class Bandit
         rGs = new List<RG>();
         Tattoos = new List<Tattoo>();
         Addresses = new List<AssociateAddresses>();
+        Vehicles = new List<Vehicle>();
+        Guns = new List<Gun>();
+        SocialMedias = new List<SocialMedia>();
         ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height, photo, extension, nationality, naturalness, maritalStatus, criminalSituation, oRCRIM, crimeFunction, profession, criminalRG, chainRegistration, operationPhone, whatsApp, pixEmail, pixPhone, pixCPF);
     }
 

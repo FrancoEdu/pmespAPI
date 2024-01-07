@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pmesp.Infrastructure.Context;
 
@@ -10,9 +11,11 @@ using pmesp.Infrastructure.Context;
 namespace pmesp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240107205309_tableVehiclesUpdate")]
+    partial class tableVehiclesUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,46 +199,6 @@ namespace pmesp.Infrastructure.Migrations
                     b.ToTable("Cops");
                 });
 
-            modelBuilder.Entity("pmesp.Domain.Entities.Guns.Gun", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("BanditId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Brand")
-                        .HasMaxLength(12)
-                        .HasColumnType("varchar(12)");
-
-                    b.Property<string>("Caliber")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("varchar(5)");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("National")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Numeration")
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
-
-                    b.Property<bool?>("Shaved")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BanditId");
-
-                    b.ToTable("Guns");
-                });
-
             modelBuilder.Entity("pmesp.Domain.Entities.RGs.RG", b =>
                 {
                     b.Property<string>("Id")
@@ -267,34 +230,6 @@ namespace pmesp.Infrastructure.Migrations
                     b.HasIndex("BanditId");
 
                     b.ToTable("RGs");
-                });
-
-            modelBuilder.Entity("pmesp.Domain.Entities.SocialMedias.SocialMedia", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("BanditId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Link")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Owner")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Platform")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BanditId");
-
-                    b.ToTable("SocialMedias");
                 });
 
             modelBuilder.Entity("pmesp.Domain.Entities.Tattoos.Tattoo", b =>
@@ -392,32 +327,10 @@ namespace pmesp.Infrastructure.Migrations
                     b.Navigation("Bandit");
                 });
 
-            modelBuilder.Entity("pmesp.Domain.Entities.Guns.Gun", b =>
-                {
-                    b.HasOne("pmesp.Domain.Entities.Bandits.Bandit", "Bandit")
-                        .WithMany("Guns")
-                        .HasForeignKey("BanditId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Bandit");
-                });
-
             modelBuilder.Entity("pmesp.Domain.Entities.RGs.RG", b =>
                 {
                     b.HasOne("pmesp.Domain.Entities.Bandits.Bandit", "Bandit")
                         .WithMany("rGs")
-                        .HasForeignKey("BanditId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Bandit");
-                });
-
-            modelBuilder.Entity("pmesp.Domain.Entities.SocialMedias.SocialMedia", b =>
-                {
-                    b.HasOne("pmesp.Domain.Entities.Bandits.Bandit", "Bandit")
-                        .WithMany("SocialMedias")
                         .HasForeignKey("BanditId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -455,10 +368,6 @@ namespace pmesp.Infrastructure.Migrations
             modelBuilder.Entity("pmesp.Domain.Entities.Bandits.Bandit", b =>
                 {
                     b.Navigation("Addresses");
-
-                    b.Navigation("Guns");
-
-                    b.Navigation("SocialMedias");
 
                     b.Navigation("Tattoos");
 
