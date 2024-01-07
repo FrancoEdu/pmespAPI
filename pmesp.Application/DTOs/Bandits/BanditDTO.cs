@@ -20,6 +20,22 @@ public class BanditDTO
     public string? Surname { get; set; }
     public float? Weight { get; set; }
     public float? Height { get; set; }
+    public string? PrincipalPhoto { get; set; }
+    public string? ExtensionPhoto { get; set; }
+    public string? Nationality { get; set; }
+    public string? Naturalness { get; set; }
+    public string? MaritalStatus { get; set; }
+    public string? CriminalSituation { get; set; }
+    public string? ORCRIM { get; set; }
+    public string? CrimeFunction { get; set; }
+    public string? Profession { get; set; }
+    public string? CriminalRG { get; set; }
+    public string? ChainRegistration { get; set; }
+    public string? OperationPhone { get; set; }
+    public string? WhatsApp { get; set; }
+    public string? PixEmail { get; set; }
+    public string? PixPhone { get; set; }
+    public string? PixCPF { get; set; }
     public ICollection<RGsDTO> RGs { get; set; }
     public ICollection<TattooDTO> Tattoos { get; set; }
     public ICollection<AddressDTO> Addresses { get; set; }

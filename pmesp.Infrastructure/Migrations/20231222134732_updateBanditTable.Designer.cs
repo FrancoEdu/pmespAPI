@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pmesp.Infrastructure.Context;
 
@@ -10,9 +11,11 @@ using pmesp.Infrastructure.Context;
 namespace pmesp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231222134732_updateBanditTable")]
+    partial class updateBanditTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,18 +86,6 @@ namespace pmesp.Infrastructure.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("varchar(14)");
 
-                    b.Property<string>("ChainRegistration")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("CrimeFunction")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("CriminalRG")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("CriminalSituation")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
@@ -108,43 +99,16 @@ namespace pmesp.Infrastructure.Migrations
                     b.Property<float?>("Height")
                         .HasColumnType("float");
 
-                    b.Property<string>("MaritalStatus")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)");
 
-                    b.Property<string>("Nationality")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Naturalness")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ORCRIM")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("OperationPhone")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Phone")
                         .HasMaxLength(12)
                         .HasColumnType("varchar(12)");
 
-                    b.Property<string>("PixCPF")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PixEmail")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PixPhone")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("PrincipalPhoto")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Profession")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Surname")
@@ -152,9 +116,6 @@ namespace pmesp.Infrastructure.Migrations
 
                     b.Property<float?>("Weight")
                         .HasColumnType("float");
-
-                    b.Property<string>("WhatsApp")
-                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

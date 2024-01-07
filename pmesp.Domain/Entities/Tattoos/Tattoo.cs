@@ -1,7 +1,5 @@
 ﻿using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Validations;
-using System.Drawing;
-using System.Xml.Linq;
 
 namespace pmesp.Domain.Entities.Tattoos;
 
