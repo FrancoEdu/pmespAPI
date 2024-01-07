@@ -3,8 +3,11 @@ using pmesp.Domain.Entities.Addresses;
 using pmesp.Domain.Entities.AssociateAddress;
 using pmesp.Domain.Entities.Bandits;
 using pmesp.Domain.Entities.Cops;
+using pmesp.Domain.Entities.Guns;
 using pmesp.Domain.Entities.RGs;
+using pmesp.Domain.Entities.SocialMedias;
 using pmesp.Domain.Entities.Tattoos;
+using pmesp.Domain.Entities.Vehicles;
 
 namespace pmesp.Infrastructure.Context;
 
@@ -17,6 +20,9 @@ public class ApplicationDbContext : DbContext
     public DbSet<Tattoo> Tattoos { get; set; }
     public DbSet<RG> RGs { get; set; }
     public DbSet<Cop> Cops { get; set; }
+    public DbSet<Vehicle> Vehicles { get; set; }
+    public DbSet<Gun> Guns { get; set; }
+    public DbSet<SocialMedia> SocialMedias { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
