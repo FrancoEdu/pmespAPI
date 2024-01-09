@@ -2,6 +2,8 @@
 using pmesp.Domain.Entities.Addresses;
 using pmesp.Domain.Entities.AssociateAddress;
 using pmesp.Domain.Entities.Bandits;
+using pmesp.Domain.Entities.Childs;
+using pmesp.Domain.Entities.ChildsBandits;
 using pmesp.Domain.Entities.Cops;
 using pmesp.Domain.Entities.Guns;
 using pmesp.Domain.Entities.RGs;
@@ -23,6 +25,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Vehicle> Vehicles { get; set; }
     public DbSet<Gun> Guns { get; set; }
     public DbSet<SocialMedia> SocialMedias { get; set; }
+    public DbSet<Child> Childs { get; set; }
+    public DbSet<ChildBandit> ChildBandit { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -1,5 +1,6 @@
 ﻿using pmesp.Domain.Entities.Addresses;
 using pmesp.Domain.Entities.AssociateAddress;
+using pmesp.Domain.Entities.ChildsBandits;
 using pmesp.Domain.Entities.Guns;
 using pmesp.Domain.Entities.RGs;
 using pmesp.Domain.Entities.SocialMedias;
@@ -44,6 +45,7 @@ public class Bandit
     public ICollection<Gun> Guns { get; private set; }
     public ICollection<SocialMedia> SocialMedias { get; private set; }
     public ICollection<AssociateAddresses> Addresses { get; private set; }
+    public ICollection<ChildBandit> Childs { get; private set; }
 
     public Bandit()
     {
@@ -84,6 +86,7 @@ public class Bandit
         Vehicles = new List<Vehicle>();
         Guns = new List<Gun>();
         SocialMedias = new List<SocialMedia>();
+        Childs = new List<ChildBandit>();
         ValidateDomain(name, description, cPF, birthday, phone, email, surname, weight, height, photo, extension, nationality, naturalness, maritalStatus, criminalSituation, oRCRIM, crimeFunction, profession, criminalRG, chainRegistration, operationPhone, whatsApp, pixEmail, pixPhone, pixCPF);
     }
 
